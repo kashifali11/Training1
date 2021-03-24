@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import { fetchPeople } from "../redux/actions/action.jsx";
 import {
@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import CustomModal from "./modal.jsx";
 
 const useStyles = makeStyles({
   cardCont: {
@@ -23,6 +24,8 @@ const useStyles = makeStyles({
   },
 });
 function Home(props) {
+  const [open,setOpen] = useState(false);
+  const [id,setID] = useState("");
   const classes = useStyles();
   const observer = useRef();
   const lastPersonRef = (node) =>{
@@ -33,7 +36,6 @@ function Home(props) {
     observer.current = new IntersectionObserver(entries=>{
       if(entries[0].isIntersecting){
         if(props.hasMore){
-          console.log();
           props.fetch(props.page);
         }
       }
@@ -47,8 +49,12 @@ function Home(props) {
   }, []);
 
   const handleClick = (ev) => {
-    console.log(ev.target.id);
+    setOpen(true);
+    setID(ev.target.id);
   };
+  const handleClose = () => {
+    setOpen(false);
+  }
   const Progress = () => {
     if (props.loading) {
       return <CircularProgress />;
@@ -59,6 +65,12 @@ function Home(props) {
       return <div></div>;
     }
   };
+  const Modal = () =>{
+    if(open){
+      return <CustomModal op={open} hClose={handleClose} perID={id} />
+    }
+    else return <div></div>
+  }
   if (props.people != []) {
     return (
       <div>
@@ -121,6 +133,7 @@ function Home(props) {
           })}
         </Grid>
         <Progress />
+        <Modal />
       </div>
     );
   } else {
@@ -129,7 +142,7 @@ function Home(props) {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetch: () => dispatch(fetchPeople()),
+    fetch: (page) => dispatch(fetchPeople(page)),
   };
 };
 const mapStateToProps = (state) => {
