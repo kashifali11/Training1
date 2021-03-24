@@ -1,18 +1,5 @@
-import { FETCH_PEOPLE } from "../types.jsx";
-
-const initialState = {
-  people: [],
-};
-
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case FETCH_PEOPLE:
-      return {
-        ...state,
-        people: action.payload,
-      };
-
-    default:
-      return state;
-  }
-}
+import { combineReducers } from "redux";
+import fetchReducer from "./fetchReducer.jsx";
+export default combineReducers({
+    fetch: fetchReducer,
+})
