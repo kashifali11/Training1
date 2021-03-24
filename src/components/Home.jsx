@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 function Home(props) {
   const classes = useStyles();
   const observer = useRef();
-  const lastPersonRef = useCallback(node=>{
+  const lastPersonRef = (node) =>{
     if(props.loading) return;
     if(observer.current) {
       observer.current.disconnect();
@@ -33,14 +33,15 @@ function Home(props) {
     observer.current = new IntersectionObserver(entries=>{
       if(entries[0].isIntersecting){
         if(props.hasMore){
-          props.fetch(1);
+          console.log();
+          props.fetch(props.page);
         }
       }
     })
     if(node) {
       observer.current.observe(node);
     }
-  },[props.Loading,props.hasMore]);
+  };
   useEffect(() => {
     props.fetch(1);
   }, []);
@@ -48,7 +49,6 @@ function Home(props) {
   const handleClick = (ev) => {
     console.log(ev.target.id);
   };
-  console.log(props.hasMore == true);
   const Progress = () => {
     if (props.loading) {
       return <CircularProgress />;
@@ -137,6 +137,7 @@ const mapStateToProps = (state) => {
     people: state.fetch.people,
     hasMore: state.fetch.hasMore,
     loading: state.fetch.loading,
+    page: state.fetch.page,
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
