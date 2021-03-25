@@ -1,4 +1,4 @@
-import { FETCH_PEOPLE, FETCHING } from "../types.jsx";
+import { FETCH_PEOPLE, FETCHING, RESET_FETCh } from "../types.jsx";
 
 const initialState = {
   people: [],
@@ -22,9 +22,15 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       };
+    case RESET_FETCh:
+      return {
+        ...state,
+        people: [],
+        hasMore: true,
+        page: 1,
+        loading: false,
+      };
     default:
       return state;
   }
 }
-
-

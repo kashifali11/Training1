@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
-import { fetchPeople } from "../redux/actions/action.jsx";
+import { fetchPeople, resetFetch } from "../redux/actions/action.jsx";
 import {
   Card,
   CardContent,
@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomModal from "./modal.jsx";
+import Search from "./search.jsx";
+import { getPeopleFilteredByKeyword } from "../redux/selectors/filterPrerson.jsx";
 
 const useStyles = makeStyles({
   cardCont: {
@@ -22,31 +24,35 @@ const useStyles = makeStyles({
     width: 170,
     height: "auto",
   },
+  cont: {
+    paddingTop: 120,
+  },
 });
 function Home(props) {
-  const [open,setOpen] = useState(false);
-  const [id,setID] = useState("");
+  const [open, setOpen] = useState(false);
+  const [id, setID] = useState("");
   const classes = useStyles();
   const observer = useRef();
-  const lastPersonRef = (node) =>{
-    if(props.loading) return;
-    if(observer.current) {
+  const lastPersonRef = (node) => {
+    if (props.loading) return;
+    if (observer.current) {
       observer.current.disconnect();
     }
-    observer.current = new IntersectionObserver(entries=>{
-      if(entries[0].isIntersecting){
-        if(props.hasMore){
-          props.fetch(props.page);
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        if (props.hasMore) {
+          props.fetch(props.page, props.nat);
         }
       }
-    })
-    if(node) {
+    });
+    if (node) {
       observer.current.observe(node);
     }
   };
   useEffect(() => {
-    props.fetch(1);
-  }, []);
+    props.reset();
+    props.fetch(1, props.nat);
+  }, [props.nat]);
 
   const handleClick = (ev) => {
     setOpen(true);
@@ -54,84 +60,85 @@ function Home(props) {
   };
   const handleClose = () => {
     setOpen(false);
-  }
+  };
   const Progress = () => {
     if (props.loading) {
       return <CircularProgress />;
-    } 
-    if(!props.hasMore) {
-      return <Typography>No More</Typography>
+    }
+    if (!props.hasMore) {
+      return <Typography>No More</Typography>;
     } else {
       return <div></div>;
     }
   };
-  const Modal = () =>{
-    if(open){
-      return <CustomModal op={open} hClose={handleClose} perID={id} />
-    }
-    else return <div></div>
-  }
+  const Modal = () => {
+    if (open) {
+      return <CustomModal op={open} hClose={handleClose} perID={id} />;
+    } else return <div></div>;
+  };
   if (props.people != []) {
     return (
       <div>
-        <Grid container>
-          {props.people.map((p, index) => {
-            if (props.people.length === index + 1) {
-              return (
-                <Grid item key={p.login.uuid}>
-                  <Card ref={lastPersonRef} className={classes.cardCont}>
-                    <CardContent>
-                      <img
-                        id={p.login.uuid}
-                        onClick={handleClick}
-                        className={classes.image}
-                        src={p.picture.large}
-                        alt="Persons Image"
-                      />
-                      <Divider />
-                      <Typography
-                        id={p.login.uuid}
-                        onClick={handleClick}
-                        variant="h6"
-                        component="p"
-                        style={{ marginTop: 10 }}
-                      >
-                        {p.name.first} {p.name.last}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              );
-            }
-            else{
-              return (
-                <Grid item key={p.login.uuid}>
-                  <Card className={classes.cardCont}>
-                    <CardContent>
-                      <img
-                        id={p.login.uuid}
-                        onClick={handleClick}
-                        className={classes.image}
-                        src={p.picture.large}
-                        alt="Persons Image"
-                      />
-                      <Divider />
-                      <Typography
-                        id={p.login.uuid}
-                        onClick={handleClick}
-                        variant="h6"
-                        component="p"
-                        style={{ marginTop: 10 }}
-                      >
-                        {p.name.first} {p.name.last}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              )
-            }
-          })}
-        </Grid>
+        <Search />
+        <div className={classes.cont}>
+          <Grid container >
+            {props.people.map((p, index) => {
+              if (props.people.length === index + 1) {
+                return (
+                  <Grid item key={p.login.uuid}>
+                    <Card ref={lastPersonRef} className={classes.cardCont}>
+                      <CardContent>
+                        <img
+                          id={p.login.uuid}
+                          onClick={handleClick}
+                          className={classes.image}
+                          src={p.picture.large}
+                          alt="Persons Image"
+                        />
+                        <Divider />
+                        <Typography
+                          id={p.login.uuid}
+                          onClick={handleClick}
+                          variant="h6"
+                          component="p"
+                          style={{ marginTop: 10 }}
+                        >
+                          {p.name.first} {p.name.last}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                );
+              } else {
+                return (
+                  <Grid item key={p.login.uuid}>
+                    <Card className={classes.cardCont}>
+                      <CardContent>
+                        <img
+                          id={p.login.uuid}
+                          onClick={handleClick}
+                          className={classes.image}
+                          src={p.picture.large}
+                          alt="Persons Image"
+                        />
+                        <Divider />
+                        <Typography
+                          id={p.login.uuid}
+                          onClick={handleClick}
+                          variant="h6"
+                          component="p"
+                          style={{ marginTop: 10 }}
+                        >
+                          {p.name.first} {p.name.last}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                );
+              }
+            })}
+          </Grid>
+        </div>
         <Progress />
         <Modal />
       </div>
@@ -142,15 +149,24 @@ function Home(props) {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetch: (page) => dispatch(fetchPeople(page)),
+    fetch: (page, nat) => dispatch(fetchPeople(page, nat)),
+    reset: () => dispatch(resetFetch()),
   };
 };
 const mapStateToProps = (state) => {
+  let p;
+  if(state.settings.search===""){
+    p = state.fetch.people
+  }
+  else{
+    p = getPeopleFilteredByKeyword(state);
+  }
   return {
-    people: state.fetch.people,
+    people: p,
     hasMore: state.fetch.hasMore,
     loading: state.fetch.loading,
     page: state.fetch.page,
+    nat: state.settings.nationality,
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

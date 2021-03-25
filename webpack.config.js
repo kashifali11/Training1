@@ -6,6 +6,12 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/build"),
     filename: "bundle.js",
+    publicPath: "/",
+  },
+  devServer: {
+    historyApiFallback: {
+      index: "/",
+    },
   },
   module: {
     rules: [
@@ -47,5 +53,6 @@ module.exports = {
       process: "process/browser",
     }),
   ],
+
   devtool: false,
 };
