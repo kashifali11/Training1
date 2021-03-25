@@ -33,6 +33,7 @@ function Home(props) {
   const [id, setID] = useState("");
   const classes = useStyles();
   const observer = useRef();
+  
   const lastPersonRef = (node) => {
     if (props.loading) return;
     if (observer.current) {
@@ -66,15 +67,15 @@ function Home(props) {
       return <CircularProgress />;
     }
     if (!props.hasMore) {
-      return <Typography>No More</Typography>;
+      return <Typography>End of users catalog</Typography>;
     } else {
-      return <div></div>;
+      return <div />;
     }
   };
   const Modal = () => {
     if (open) {
       return <CustomModal op={open} hClose={handleClose} perID={id} />;
-    } else return <div></div>;
+    } else return <div />;
   };
   if (props.people != []) {
     return (
@@ -156,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   let p;
   if(state.settings.search===""){
-    p = state.fetch.people
+    p = state.fetch.people.slice(0,state.fetch.people.length-50)
   }
   else{
     p = getPeopleFilteredByKeyword(state);
