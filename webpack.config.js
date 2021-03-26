@@ -34,15 +34,6 @@ module.exports = {
         exclude: [/nodeModules/],
         use: ["style-loader", "css-loader"],
       },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        exclude: [/nodeModules/, /server/],
-        use: [
-          {
-            loader: "file-loader",
-          },
-        ],
-      },
     ],
   },
   plugins: [
