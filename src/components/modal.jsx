@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { getPerson } from "../redux/selectors.jsx/filterPrerson.jsx";
 
 function CustomModal(props) {
-    const [person, setperson] = useState([]);
+    const [person, setPerson] = useState([]);
     useEffect(() => {
-        setperson(props.person(props.perID))
+        setPerson(props.person(props.perID))
     }, [props.op])
     
     if(person[0]!==undefined){
