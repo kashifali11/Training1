@@ -33,7 +33,7 @@ function Home(props) {
   const [id, setID] = useState("");
   const classes = useStyles();
   const observer = useRef();
-  
+
   const lastPersonRef = (node) => {
     if (props.loading) return;
     if (observer.current) {
@@ -82,7 +82,7 @@ function Home(props) {
       <div>
         <Search />
         <div className={classes.cont}>
-          <Grid container >
+          <Grid container>
             {props.people.map((p, index) => {
               if (props.people.length === index + 1) {
                 return (
@@ -156,10 +156,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 const mapStateToProps = (state) => {
   let p;
-  if(state.settings.search===""){
-    p = state.fetch.people.slice(0,state.fetch.people.length-50)
-  }
-  else{
+  if (state.settings.search === "") {
+    p = state.fetch.people.slice(0, state.fetch.people.length - 50);
+  } else {
     p = getPeopleFilteredByKeyword(state);
   }
   return {

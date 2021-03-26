@@ -5,15 +5,15 @@ import { setNat } from "../redux/actions/action.jsx";
 
 function Settings(props) {
   const [nationality, setNationality] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     setNationality(props.nat);
-  },[])
+  }, []);
   const handleChange = (ev) => {
-      setNationality(ev.target.value);
-      props.setNat(ev.target.value);
-  }
+    setNationality(ev.target.value);
+    props.setNat(ev.target.value);
+  };
   console.log(props);
-  localStorage.setItem("nationality",nationality);
+  localStorage.setItem("nationality", nationality);
   return (
     <div>
       <Typography variant="h4" component="h1">
@@ -31,16 +31,16 @@ function Settings(props) {
     </div>
   );
 }
-const mapStateToProps = (state) =>{
-    return {
-        nat: state.settings.nationality,
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    nat: state.settings.nationality,
+  };
+};
 
-const mapDispatchToProps = (dispatch) =>{
-    return {
-        setNat: (nat)=>dispatch(setNat(nat)),
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNat: (nat) => dispatch(setNat(nat)),
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

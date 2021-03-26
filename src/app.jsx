@@ -9,7 +9,7 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import { Route, Switch, useHistory } from "react-router-dom";
-import Home from "./components/Home.jsx";
+import Home from "./components/home.jsx";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Settings from "./components/settings.jsx";
 const useStyles = makeStyles({
