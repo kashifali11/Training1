@@ -1,4 +1,4 @@
-import { Menu, MenuItem, Select, Typography } from "@material-ui/core";
+import { MenuItem, Select, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setNat } from "../redux/actions/action.jsx";

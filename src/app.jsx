@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import {
   AppBar,
-  Button,
   Container,
   IconButton,
-  InputBase,
   makeStyles,
   Menu,
   MenuItem,
-  TextField,
   Toolbar,
-  Typography,
 } from "@material-ui/core";
 import { Route, Switch, useHistory } from "react-router-dom";
 import Home from "./components/Home.jsx";

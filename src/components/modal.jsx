@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react'
-import { Card, CardContent, Dialog, makeStyles, Typography} from "@material-ui/core";
+import { Card, CardContent, Dialog, Typography} from "@material-ui/core";
 import { connect } from 'react-redux';
 import { getPerson } from "../redux/selectors.jsx/filterPrerson.jsx";
 
