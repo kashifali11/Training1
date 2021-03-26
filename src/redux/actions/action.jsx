@@ -56,9 +56,9 @@ export const resetFetch = () => (dispatch) => {
   });
 };
 
-export const setSearchKey = (key) => (dispatch) => {
-  return dispatch({
-    type: SET_SEARCH_KEY,
-    payload: key,
-  });
-};
+// export const setSearchKeyAction = (key) => (dispatch) => {
+//   return dispatch({
+//     type: SET_SEARCH_KEY,
+//     payload: key,
+//   });
+// };

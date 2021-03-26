@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchPeople, resetFetch } from "../redux/actions/action.jsx";
 import {
   Card,
@@ -12,7 +12,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import CustomModal from "./modal.jsx";
 import Search from "./search.jsx";
-import { getPeopleFilteredByKeyword } from "../redux/selectors.jsx/filterPrerson.jsx";
+import { selectPeople } from "../redux/selectors/selectPeople.jsx";
 
 const useStyles = makeStyles({
   cardCont: {
@@ -28,21 +28,27 @@ const useStyles = makeStyles({
     paddingTop: 120,
   },
 });
+
 function Home(props) {
   const [open, setOpen] = useState(false);
   const [id, setID] = useState("");
   const classes = useStyles();
   const observer = useRef();
-
+  const dispatch = useDispatch();
+  const people = useSelector((state) => selectPeople(state));
+  const hasMore = useSelector((state) => state.fetch.hasMore);
+  const loading = useSelector((state) => state.fetch.loading);
+  const page = useSelector((state) => state.fetch.page);
+  const nat = useSelector((state) => state.settings.nationality);
   const lastPersonRef = (node) => {
-    if (props.loading) return;
+    if (loading) return;
     if (observer.current) {
       observer.current.disconnect();
     }
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        if (props.hasMore) {
-          props.fetch(props.page, props.nat);
+        if (hasMore) {
+          dispatch(fetchPeople(page, nat));
         }
       }
     });
@@ -51,9 +57,9 @@ function Home(props) {
     }
   };
   useEffect(() => {
-    props.reset();
-    props.fetch(1, props.nat);
-  }, [props.nat]);
+    dispatch(resetFetch());
+    dispatch(fetchPeople(1, nat));
+  }, [nat]);
 
   const handleClick = (ev) => {
     setOpen(true);
@@ -63,10 +69,10 @@ function Home(props) {
     setOpen(false);
   };
   const Progress = () => {
-    if (props.loading) {
+    if (loading) {
       return <CircularProgress />;
     }
-    if (!props.hasMore) {
+    if (!hasMore) {
       return <Typography>End of users catalog</Typography>;
     } else {
       return <div />;
@@ -77,14 +83,14 @@ function Home(props) {
       return <CustomModal op={open} hClose={handleClose} perID={id} />;
     } else return <div />;
   };
-  if (props.people != []) {
+  if (people != []) {
     return (
       <div>
         <Search />
         <div className={classes.cont}>
           <Grid container>
-            {props.people.map((p, index) => {
-              if (props.people.length === index + 1) {
+            {people.map((p, index) => {
+              if (people.length === index + 1) {
                 return (
                   <Grid item key={p.login.uuid}>
                     <Card ref={lastPersonRef} className={classes.cardCont}>
@@ -148,25 +154,5 @@ function Home(props) {
     return <CircularProgress />;
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetch: (page, nat) => dispatch(fetchPeople(page, nat)),
-    reset: () => dispatch(resetFetch()),
-  };
-};
-const mapStateToProps = (state) => {
-  let p;
-  if (state.settings.search === "") {
-    p = state.fetch.people.slice(0, state.fetch.people.length - 50);
-  } else {
-    p = getPeopleFilteredByKeyword(state);
-  }
-  return {
-    people: p,
-    hasMore: state.fetch.hasMore,
-    loading: state.fetch.loading,
-    page: state.fetch.page,
-    nat: state.settings.nationality,
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+export default Home;

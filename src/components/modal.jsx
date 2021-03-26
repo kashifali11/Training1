@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, CardContent, Dialog, Typography } from "@material-ui/core";
-import { connect } from "react-redux";
-import { getPerson } from "../redux/selectors.jsx/filterPrerson.jsx";
+import { useSelector } from "react-redux";
+import { getPerson } from "../redux/selectors/filterPrerson.jsx";
 
 function CustomModal(props) {
-  const [person, setPerson] = useState([]);
-  useEffect(() => {
-    setPerson(props.person(props.perID));
-  }, [props.op]);
-
+  const person = useSelector((state) => getPerson(state, props.perID));
   if (person[0] !== undefined) {
     return (
       <Dialog open={props.op} onClose={props.hClose}>
@@ -36,9 +32,5 @@ function CustomModal(props) {
     return <div></div>;
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    person: (id) => getPerson(state, id),
-  };
-};
-export default connect(mapStateToProps, null)(CustomModal);
+
+export default CustomModal;

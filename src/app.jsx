@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     marginTop: 90,
   },
 });
+
 export default function App() {
   const classes = useStyles();
   const history = useHistory();
