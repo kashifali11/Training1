@@ -1,7 +1,6 @@
 import {
   FETCHING,
   FETCH_PEOPLE,
-  SET_SEARCH_KEY,
   RESET_FETCh,
   SET_NATIONALITY,
 } from "../types.jsx";
@@ -55,10 +54,3 @@ export const resetFetch = () => (dispatch) => {
     type: RESET_FETCh,
   });
 };
-
-// export const setSearchKeyAction = (key) => (dispatch) => {
-//   return dispatch({
-//     type: SET_SEARCH_KEY,
-//     payload: key,
-//   });
-// };

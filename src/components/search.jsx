@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     padding: 10,
   },
 });
-function Search(props) {
+function Search() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const nat = useSelector((state) => state.settings.nationality);
@@ -21,7 +21,6 @@ function Search(props) {
     setSearchKey(ev.target.value);
   };
   const handleClick = (ev) => {
-    // props.setKey(searchKey);
     dispatch({
       type: SET_SEARCH_KEY,
       payload: searchKey,

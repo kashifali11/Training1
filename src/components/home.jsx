@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Home(props) {
+function Home() {
   const [open, setOpen] = useState(false);
   const [id, setID] = useState("");
   const classes = useStyles();
