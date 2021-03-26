@@ -44,7 +44,7 @@ export default function App() {
     <Container className={classes.container}>
       <AppBar>
         <Toolbar>
-          Training App
+          Address Book
           <IconButton
             onClick={menuClick}
             style={{ marginLeft: "auto" }}
