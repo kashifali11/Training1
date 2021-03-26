@@ -1,12 +1,8 @@
 import React,{ useState,useEffect } from 'react'
 import { Card, CardContent, Dialog, makeStyles, Typography} from "@material-ui/core";
 import { connect } from 'react-redux';
-import { getPerson } from "../redux/selectors/filterPrerson.jsx";
-const useStyles = makeStyles({
-    modalCont: {
+import { getPerson } from "../redux/selectors.jsx/filterPrerson.jsx";
 
-    }
-})
 function CustomModal(props) {
     const [person, setperson] = useState([]);
     useEffect(() => {

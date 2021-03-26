@@ -12,7 +12,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import CustomModal from "./modal.jsx";
 import Search from "./search.jsx";
-import { getPeopleFilteredByKeyword } from "../redux/selectors/filterPrerson.jsx";
+import { getPeopleFilteredByKeyword } from "../redux/selectors.jsx/filterPrerson.jsx";
 
 const useStyles = makeStyles({
   cardCont: {
