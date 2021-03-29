@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, makeStyles } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { SET_SEARCH_KEY } from "../redux/types.jsx";
-import { fetchPeople, resetFetch } from "../redux/actions/action.jsx";
+import { SET_SEARCH_KEY } from "../../../../redux/types/settingsTypes.jsx";
 
 const useStyles = makeStyles({
   cont: {
@@ -25,8 +24,6 @@ function Search() {
       type: SET_SEARCH_KEY,
       payload: searchKey,
     });
-    dispatch(resetFetch());
-    dispatch(fetchPeople(1, nat));
   };
   return (
     <Container className={classes.cont}>

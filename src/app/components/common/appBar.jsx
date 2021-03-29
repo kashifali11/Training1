@@ -1,26 +1,8 @@
 import React, { useState } from "react";
-import {
-  AppBar,
-  Container,
-  IconButton,
-  makeStyles,
-  Menu,
-  MenuItem,
-  Toolbar,
-} from "@material-ui/core";
-import { Route, Switch, useHistory } from "react-router-dom";
-import Home from "./components/home.jsx";
+import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Settings from "./components/settings.jsx";
-const useStyles = makeStyles({
-  container: {
-    marginLeft: 50,
-    marginTop: 90,
-  },
-});
-
-export default function App() {
-  const classes = useStyles();
+export default function CustomAppBar() {
   const history = useHistory();
   const [anchor, setAnchor] = useState(null);
   const menuClick = (ev) => {
@@ -38,7 +20,7 @@ export default function App() {
     handleClose();
   };
   return (
-    <Container className={classes.container}>
+    <div>
       <AppBar>
         <Toolbar>
           Address Book
@@ -51,14 +33,10 @@ export default function App() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/settings" component={Settings} />
-      </Switch>
       <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
         <MenuItem onClick={handleHomeRoute}>Home</MenuItem>
         <MenuItem onClick={handleSettingsRoute}>Settings</MenuItem>
       </Menu>
-    </Container>
+    </div>
   );
 }

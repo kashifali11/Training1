@@ -1,5 +1,4 @@
-import { SET_SEARCH_KEY, SET_NATIONALITY } from "../types.jsx";
-
+import { SET_SEARCH_KEY, SET_NATIONALITY } from "../types/settingsTypes.jsx";
 const initialState = {
   nationality: "",
   search: "",

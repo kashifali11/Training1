@@ -1,7 +1,7 @@
 import { MenuItem, Select, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setNat } from "../redux/actions/action.jsx";
+import { setNat } from "../../redux/actions/settingsAction.jsx";
 
 function Settings(props) {
   const [nationality, setNationality] = useState("");

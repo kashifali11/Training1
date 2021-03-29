@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import App from "./app.jsx";
+import App from "./app/app.jsx";
 import Store from "./redux/store.jsx";
 import { Provider } from "react-redux";
-import ErrorBoundary from "./errorBoundary.jsx";
+import ErrorBoundary from "./app/components/errorBoundry/errorBoundary.jsx";
 ReactDOM.render(
   <ErrorBoundary>
     <Provider store={Store}>

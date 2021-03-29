@@ -2,8 +2,7 @@ import {
   FETCHING,
   FETCH_PEOPLE,
   RESET_FETCh,
-  SET_NATIONALITY,
-} from "../types.jsx";
+} from "../types/types.jsx";
 import axios from "axios";
 export const fetchPeople = (page, nat) => (dispatch) => {
   dispatch({
@@ -42,12 +41,6 @@ export const fetchPeople = (page, nat) => (dispatch) => {
   }
 };
 
-export const setNat = (nat) => (dispatch) => {
-  return dispatch({
-    type: SET_NATIONALITY,
-    payload: nat,
-  });
-};
 
 export const resetFetch = () => (dispatch) => {
   return dispatch({
