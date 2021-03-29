@@ -14,8 +14,6 @@ function Settings(props) {
     setNationality(ev.target.value);
     dispatch(setNat(ev.target.value));
   };
-  console.log(props);
-  localStorage.setItem("nationality", nationality);
   return (
     <div>
       <Typography variant="h4" component="h1">
