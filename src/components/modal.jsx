@@ -24,6 +24,7 @@ function CustomModal(props) {
             </Typography>
             <Typography>Phone: {person[0].phone}</Typography>
             <Typography>Cell: {person[0].cell}</Typography>
+            <Typography>Nationality: {person[0].nat}</Typography>
           </CardContent>
         </Card>
       </Dialog>
