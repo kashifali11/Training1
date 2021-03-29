@@ -16,16 +16,22 @@ import { selectPeople } from "../redux/selectors/selectPeople.jsx";
 
 const useStyles = makeStyles({
   cardCont: {
-    width: 200,
-    minHeight: 250,
+    width: 250,
+    minHeight: 300,
     margin: 16,
   },
   image: {
-    width: 170,
+    width: 220,
     height: "auto",
   },
   cont: {
-    paddingTop: 120,
+    paddingTop: 12,
+    marginTop: -20,
+    marginLeft: 350,
+    marginRight: -400,
+  },
+  progressBar: {
+    marginLeft: 800,
   },
 });
 
@@ -70,7 +76,7 @@ function Home() {
   };
   const Progress = () => {
     if (loading) {
-      return <CircularProgress />;
+      return <CircularProgress className={classes.progressBar} />;
     }
     if (!hasMore) {
       return <Typography>End of users catalog</Typography>;
@@ -83,75 +89,85 @@ function Home() {
       return <CustomModal op={open} hClose={handleClose} perID={id} />;
     } else return <div />;
   };
-  if (people != []) {
+  if (people.length !== 0 && people !== undefined) {
     return (
       <div>
-        <Search />
-        <div className={classes.cont}>
-          <Grid container>
-            {people.map((p, index) => {
-              if (people.length === index + 1) {
-                return (
-                  <Grid item key={p.login.uuid}>
-                    <Card ref={lastPersonRef} className={classes.cardCont}>
-                      <CardContent>
-                        <img
-                          id={p.login.uuid}
-                          onClick={handleClick}
-                          className={classes.image}
-                          src={p.picture.large}
-                          alt="Persons Image"
-                        />
-                        <Divider />
-                        <Typography
-                          id={p.login.uuid}
-                          onClick={handleClick}
-                          variant="h6"
-                          component="p"
-                          style={{ marginTop: 10 }}
-                        >
-                          {p.name.first} {p.name.last}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              } else {
-                return (
-                  <Grid item key={p.login.uuid}>
-                    <Card className={classes.cardCont}>
-                      <CardContent>
-                        <img
-                          id={p.login.uuid}
-                          onClick={handleClick}
-                          className={classes.image}
-                          src={p.picture.large}
-                          alt="Persons Image"
-                        />
-                        <Divider />
-                        <Typography
-                          id={p.login.uuid}
-                          onClick={handleClick}
-                          variant="h6"
-                          component="p"
-                          style={{ marginTop: 10 }}
-                        >
-                          {p.name.first} {p.name.last}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              }
-            })}
+        <Grid container>
+          <Grid item>
+            <Search />
           </Grid>
-        </div>
-        <Progress />
+          <Grid item>
+            <div className={classes.cont}>
+              <Grid container>
+                {people.map((p, index) => {
+                  if (people.length === index + 1) {
+                    return (
+                      <Grid item key={p.login.uuid}>
+                        <Card ref={lastPersonRef} className={classes.cardCont}>
+                          <CardContent>
+                            <img
+                              id={p.login.uuid}
+                              onClick={handleClick}
+                              className={classes.image}
+                              src={p.picture.large}
+                              alt="Persons Image"
+                            />
+                            <Divider />
+                            <Typography
+                              id={p.login.uuid}
+                              onClick={handleClick}
+                              variant="inherit"
+                              component="p"
+                              style={{ marginTop: 10, fontSize: "0.5rem" }}
+                            >
+                              {p.name.first} {p.name.last}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    );
+                  } else {
+                    return (
+                      <Grid item key={p.login.uuid}>
+                        <Card className={classes.cardCont}>
+                          <CardContent>
+                            <img
+                              id={p.login.uuid}
+                              onClick={handleClick}
+                              className={classes.image}
+                              src={p.picture.large}
+                              alt="Persons Image"
+                            />
+                            <Divider />
+                            <Typography
+                              id={p.login.uuid}
+                              onClick={handleClick}
+                              variant="h6"
+                              component="p"
+                              style={{ marginTop: 10 }}
+                            >
+                              {p.name.first} {p.name.last}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    );
+                  }
+                })}
+              </Grid>
+            </div>
+            <Progress />
+          </Grid>
+        </Grid>
         <Modal />
       </div>
     );
   } else {
-    return <CircularProgress />;
+    return (
+      <div className="div">
+        <CircularProgress className={classes.progressBar} />
+      </div>
+    );
   }
 }
 

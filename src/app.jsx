@@ -14,6 +14,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Settings from "./components/settings.jsx";
 const useStyles = makeStyles({
   container: {
+    marginLeft: 50,
     marginTop: 90,
   },
 });
@@ -37,7 +38,6 @@ export default function App() {
     handleClose();
   };
   return (
-    
     <Container className={classes.container}>
       <AppBar>
         <Toolbar>
