@@ -77,13 +77,13 @@ function Home() {
         </div>
       ) : (
         <div>
-          {
-            (page === 20 ? (
-              <Typography className={classes.progressBar}>No Results Found Try Something Different</Typography>
-            ) : (
-              <CircularProgress className={classes.progressBar} />
-            ))
-          }
+          {page === 20 ? (
+            <Typography className={classes.progressBar}>
+              No Results Found Try Something Different
+            </Typography>
+          ) : (
+            <CircularProgress className={classes.progressBar} />
+          )}
         </div>
       )}
     </div>
