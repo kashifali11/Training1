@@ -14,7 +14,6 @@ const useStyles = makeStyles({
 function Search() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const nat = useSelector((state) => state.settings.nationality);
   const [searchKey, setSearchKey] = useState("");
   const handleChange = (ev) => {
     setSearchKey(ev.target.value);

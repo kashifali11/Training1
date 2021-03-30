@@ -10,7 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { getPerson } from "../../../redux/selectors/filterPrerson.js";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   media: {
     marginLeft: 50,
     marginBottom: 10,
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
     padding: 5,
   },
-}));
+});
 function CustomModal(props) {
   const classes = useStyles();
   const person = useSelector((state) => getPerson(state, props.perID));

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setNat } from "../redux/actions/settingsAction";
 
-function Settings(props) {
+function Settings() {
   const [nationality, setNationality] = useState("");
   const dispatch = useDispatch();
   const nat = useSelector((state) => state.settings.nationality);
