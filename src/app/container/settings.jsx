@@ -1,18 +1,13 @@
 import { MenuItem, Select, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setNat } from "../redux/actions/settingsAction";
+import { setNationality } from "../redux/actions/settingsAction";
 
 function Settings() {
-  const [nationality, setNationality] = useState("");
   const dispatch = useDispatch();
-  const nat = useSelector((state) => state.settings.nationality);
-  useEffect(() => {
-    setNationality(nat);
-  }, []);
+  const nationality = useSelector((state) => state.settingReducer.nationality);
   const handleChange = (ev) => {
-    setNationality(ev.target.value);
-    dispatch(setNat(ev.target.value));
+    dispatch(setNationality(ev.target.value));
   };
   return (
     <div style={{ margin: "auto", width: "70%" }}>

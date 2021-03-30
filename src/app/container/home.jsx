@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPeople, resetFetch } from "../redux/actions/userActions";
+import { fetchPeople, resetFetch } from "../redux/actions/peopleActions";
 import { CircularProgress, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import CustomModal from "../components/home/modal/modal.jsx";
+import PersonalDetailModal from "../components/home/personalDetailModal/personalDetailModal.jsx";
 import Search from "../components/home/search/search.jsx";
 import { selectPeople } from "../redux/selectors/selectPeople";
-import CustomCard from "../components/home/card/customCard.jsx";
+import PeopleList from "../components/home/peopleList/peopleList.jsx";
 import ProgressBar from "../components/home/progressBar/progress.jsx";
+import { isEmpty } from "../utils/flags";
 const useStyles = makeStyles({
   cardCont: {
     width: 250,
@@ -30,54 +31,68 @@ const useStyles = makeStyles({
 });
 
 function Home() {
-  const [open, setOpen] = useState(false);
-  const [id, setID] = useState("");
+  const [openPersonalModal, setOpenPersonalModal] = useState(false);
+  const [personId, setPersonId] = useState("");
   const classes = useStyles();
   const dispatch = useDispatch();
   const people = useSelector((state) => selectPeople(state));
-  const nat = useSelector((state) => state.settings.nationality);
-  const searchKey = useSelector((state) => state.settings.search);
-  const page = useSelector((state) => state.fetch.page);
-  useEffect(() => {
-    dispatch(resetFetch());
-    dispatch(fetchPeople(1, nat));
-  }, [nat]);
-
-  useEffect(() => {
-    if (searchKey !== "" && people.length === 0 && page < 20) {
-      dispatch(fetchPeople(page, nat));
+  // const searchKey = useSelector((state) => state.settingReducer.searchPeopleTerm);
+  const observer = useRef();
+  const hasMore = useSelector((state) => state.peopleReducer.hasMore);
+  const loading = useSelector((state) => state.peopleReducer.loading);
+  const pageNo = useSelector((state) => state.peopleReducer.pageNo);
+  const nationality = useSelector((state) => state.settingReducer.nationality);
+  const lastPersonRef = (node) => {
+    if (loading) return;
+    if (observer.current) {
+      observer.current.disconnect();
     }
-  }, [searchKey, page]);
-  const getData = (op, id) => {
-    setOpen(op);
-    setID(id);
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        if (hasMore) {
+          dispatch(fetchPeople(pageNo, nationality, 50));
+        }
+      }
+    });
+    if (node) {
+      observer.current.observe(node);
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const getPersonId = (id) => {
+    setOpenPersonalModal(true);
+    setPersonId(id);
   };
 
+  const handlePersonalModalClose = () => {
+    setOpenPersonalModal(false);
+  };
   return (
     <div>
       <Search />
-      {people.length !== 0 && people !== undefined ? (
+      {!isEmpty(people) ? (
         <div>
           <Grid container>
             <Grid item></Grid>
             <Grid item>
               <div className={classes.cont}>
                 <Grid container>
-                  <CustomCard sendData={getData} />
+                  <PeopleList setPersonId={getPersonId} />
                 </Grid>
               </div>
               <ProgressBar />
             </Grid>
           </Grid>
-          <CustomModal op={open} hClose={handleClose} perID={id} />
+          <div ref={lastPersonRef} />
+          <PersonalDetailModal
+            openModal={openPersonalModal}
+            handleModalClose={handlePersonalModalClose}
+            personalId={personId}
+          />
         </div>
       ) : (
         <div>
-          {page === 20 ? (
+          {pageNo === 20 ? (
             <Typography className={classes.progressBar}>
               No Results Found Try Something Different
             </Typography>

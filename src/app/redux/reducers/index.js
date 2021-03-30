@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import fetchReducer from "./userReducer";
+import peopleReducer from "./peopleReducer";
 import settingsReducer from "./settingsReducer";
 export default combineReducers({
-    fetch: fetchReducer,
-    settings: settingsReducer,
-})
+  peopleReducer: peopleReducer,
+  settingReducer: settingsReducer,
+});

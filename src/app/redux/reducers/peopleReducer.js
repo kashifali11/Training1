@@ -1,10 +1,16 @@
-import { FETCH_PEOPLE, FETCHING, RESET_FETCH } from "../types/userTypes.js";
+import {
+  FETCH_PEOPLE,
+  FETCHING,
+  RESET_FETCH_PEOPLE,
+  SET_SEARCH_TERM,
+} from "../types/peopleTypes.js";
 
 const initialState = {
   people: [],
   hasMore: true,
-  page: 1,
+  pageNo: 1,
   loading: false,
+  searchPeopleTerm: "",
 };
 
 export default function (state = initialState, action) {
@@ -14,7 +20,7 @@ export default function (state = initialState, action) {
         ...state,
         people: state.people.concat(action.payload),
         hasMore: state.people.length + 50 < 999 ? true : false,
-        page: state.page + 1,
+        pageNo: state.pageNo + 1,
         loading: false,
       };
     case FETCHING:
@@ -22,13 +28,18 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       };
-    case RESET_FETCH:
+    case RESET_FETCH_PEOPLE:
       return {
         ...state,
         people: [],
         hasMore: true,
-        page: 1,
+        pageNo: 1,
         loading: false,
+      };
+    case SET_SEARCH_TERM:
+      return {
+        ...state,
+        searchPeopleTerm: action.payload,
       };
     default:
       return state;

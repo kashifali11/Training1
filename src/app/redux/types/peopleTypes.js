@@ -1,0 +1,4 @@
+export const FETCH_PEOPLE = "FETCH_PEOPLE";
+export const FETCHING = "FETCHING";
+export const RESET_FETCH_PEOPLE = "RESET_FETCH_PEOPLE";
+export const SET_SEARCH_TERM = "SET_SEARCH_TERM";

@@ -3,8 +3,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function ProgressBar() {
-  const loading = useSelector((state) => state.fetch.loading);
-  const hasMore = useSelector((state) => state.fetch.hasMore);
+  const loading = useSelector((state) => state.peopleReducer.loading);
+  const hasMore = useSelector((state) => state.peopleReducer.hasMore);
   if (loading) {
     return <CircularProgress style={{ marginLeft: 800 }} />;
   }

@@ -8,16 +8,16 @@ export default function CustomAppBar() {
   const menuClick = (ev) => {
     setAnchor(ev.target);
   };
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchor(null);
   };
   const handleHomeRoute = () => {
     history.push("/");
-    handleClose();
+    handleMenuClose();
   };
   const handleSettingsRoute = () => {
     history.push("/settings");
-    handleClose();
+    handleMenuClose();
   };
   return (
     <div>
@@ -33,7 +33,7 @@ export default function CustomAppBar() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose}>
+      <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleMenuClose}>
         <MenuItem onClick={handleHomeRoute}>Home</MenuItem>
         <MenuItem onClick={handleSettingsRoute}>Settings</MenuItem>
       </Menu>

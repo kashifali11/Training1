@@ -1,2 +1,1 @@
 export const SET_NATIONALITY = "SET_NATIONALITY";
-export const SET_SEARCH_KEY = "SET_SEARCH_KEY"

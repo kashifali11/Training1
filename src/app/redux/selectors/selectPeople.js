@@ -1,10 +1,13 @@
 import { getPeopleFilteredByKeyword } from "./filterPrerson.js";
 export const selectPeople = (state) => {
-  let p;
-  if (state.settings.search === "") {
-    p = state.fetch.people.slice(0, state.fetch.people.length - 50);
+  let people;
+  if (state.peopleReducer.searchPeopleTerm === "") {
+    people = state.peopleReducer.people.slice(
+      0,
+      state.peopleReducer.people.length - 50
+    );
   } else {
-    p = getPeopleFilteredByKeyword(state);
+    people = getPeopleFilteredByKeyword(state);
   }
-  return p;
+  return people;
 };

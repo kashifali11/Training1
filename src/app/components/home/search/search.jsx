@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, makeStyles } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
-import { SET_SEARCH_KEY } from "../../../redux/types/settingsTypes";
+import { useDispatch } from "react-redux";
+import { SET_SEARCH_TERM } from "../../../redux/types/peopleTypes";
 
 const useStyles = makeStyles({
-  cont: {
+  container: {
     width: "auto",
     position: "fixed",
     background: "white",
@@ -14,26 +14,26 @@ const useStyles = makeStyles({
 function Search() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [searchKey, setSearchKey] = useState("");
-  const handleChange = (ev) => {
-    setSearchKey(ev.target.value);
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearchTermChange = (ev) => {
+    setSearchTerm(ev.target.value);
   };
-  const handleClick = (ev) => {
+  const handleSearchClick = () => {
     dispatch({
-      type: SET_SEARCH_KEY,
-      payload: searchKey,
+      type: SET_SEARCH_TERM,
+      payload: searchTerm,
     });
   };
   return (
-    <Container className={classes.cont}>
+    <Container className={classes.container}>
       <TextField
-        onChange={handleChange}
+        onChange={handleSearchTermChange}
         fullWidth
         variant="outlined"
         placeholder="Search"
       />
       <Button
-        onClick={handleClick}
+        onClick={handleSearchClick}
         style={{ marginTop: 16 }}
         color="primary"
         variant="contained"

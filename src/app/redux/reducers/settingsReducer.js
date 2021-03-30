@@ -1,7 +1,6 @@
-import { SET_SEARCH_KEY, SET_NATIONALITY } from "../types/settingsTypes.js";
+import { SET_NATIONALITY } from "../types/settingsTypes.js";
 const initialState = {
   nationality: "",
-  search: "",
 };
 
 export default function (state = initialState, action) {
@@ -11,11 +10,6 @@ export default function (state = initialState, action) {
         ...state,
         nationality: action.payload,
       };
-    case SET_SEARCH_KEY:
-        return{
-            ...state,
-            search: action.payload,
-        }
     default:
       return state;
   }
