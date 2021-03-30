@@ -1,4 +1,4 @@
-import { FETCH_PEOPLE, FETCHING, RESET_FETCh } from "../types/userTypes.js";
+import { FETCH_PEOPLE, FETCHING, RESET_FETCH } from "../types/userTypes.js";
 
 const initialState = {
   people: [],
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       };
-    case RESET_FETCh:
+    case RESET_FETCH:
       return {
         ...state,
         people: [],

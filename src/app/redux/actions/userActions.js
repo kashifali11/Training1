@@ -1,4 +1,4 @@
-import { FETCHING, FETCH_PEOPLE, RESET_FETCh } from "../types/userTypes.js";
+import { FETCHING, FETCH_PEOPLE, RESET_FETCH } from "../types/userTypes.js";
 import axios from "axios";
 export const fetchPeople = (page, nat) => (dispatch) => {
   dispatch({
@@ -30,6 +30,6 @@ export const fetchPeople = (page, nat) => (dispatch) => {
 
 export const resetFetch = () => (dispatch) => {
   return dispatch({
-    type: RESET_FETCh,
+    type: RESET_FETCH,
   });
 };

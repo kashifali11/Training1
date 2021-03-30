@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, makeStyles } from "@material-ui/core";
-import { Route, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router , Switch } from "react-router-dom";
 import Home from "./container/home.jsx";
 import Settings from "./container/settings.jsx";
 import CustomAppBar from "./components/common/appBar/appBar.jsx";
@@ -18,14 +18,18 @@ export default function App() {
   const classes = useStyles();
   return (
     <ErrorBoundary>
-      <Provider store={Store} >
-      <Container className={classes.container}>
-      <CustomAppBar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/settings" component={Settings} />
-      </Switch>
-    </Container>
+      <Provider store={Store}>
+        <Router>
+          <React.StrictMode>
+            <Container className={classes.container}>
+              <CustomAppBar />
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/settings" component={Settings} />
+              </Switch>
+            </Container>
+          </React.StrictMode>
+        </Router>
       </Provider>
     </ErrorBoundary>
   );
