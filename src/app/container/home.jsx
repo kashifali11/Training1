@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPeople, resetFetch } from "../../redux/actions/action.jsx";
+import { fetchPeople, resetFetch } from "../redux/actions/userActions";
 import { CircularProgress, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CustomModal from "../components/home/modal/modal.jsx";
 import Search from "../components/home/search/search.jsx";
-import { selectPeople } from "../../redux/selectors/selectPeople.jsx";
+import { selectPeople } from "../redux/selectors/selectPeople";
 import CustomCard from "../components/home/card/customCard.jsx";
 import ProgressBar from "../components/home/progressBar/progress.jsx";
 const useStyles = makeStyles({

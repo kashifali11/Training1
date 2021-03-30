@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { getPerson } from "../../../../redux/selectors/filterPrerson.jsx";
+import { getPerson } from "../../../redux/selectors/filterPrerson.js";
 
 const useStyles = makeStyles((theme) => ({
   media: {

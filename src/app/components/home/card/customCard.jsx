@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { selectPeople } from "../../../../redux/selectors/selectPeople.jsx";
-import { fetchPeople } from "../../../../redux/actions/action.jsx";
+import { selectPeople } from "../../../redux/selectors/selectPeople";
+import { fetchPeople } from "../../../redux/actions/userActions";
 import {
   Card,
   CardContent,

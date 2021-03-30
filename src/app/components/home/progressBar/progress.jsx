@@ -9,7 +9,9 @@ export default function ProgressBar() {
     return <CircularProgress style={{ marginLeft: 800 }} />;
   }
   if (!hasMore) {
-    return <Typography style={{ marginLeft: 800 }}>End of users catalog</Typography>;
+    return (
+      <Typography style={{ marginLeft: 800 }}>End of users catalog</Typography>
+    );
   } else {
     return null;
   }

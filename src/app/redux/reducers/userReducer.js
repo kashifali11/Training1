@@ -1,4 +1,4 @@
-import { FETCH_PEOPLE, FETCHING, RESET_FETCh } from "../types/types.jsx";
+import { FETCH_PEOPLE, FETCHING, RESET_FETCh } from "../types/userTypes.js";
 
 const initialState = {
   people: [],

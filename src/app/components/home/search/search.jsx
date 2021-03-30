@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, makeStyles } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { SET_SEARCH_KEY } from "../../../../redux/types/settingsTypes.jsx";
+import { SET_SEARCH_KEY } from "../../../redux/types/settingsTypes";
 
 const useStyles = makeStyles({
   cont: {

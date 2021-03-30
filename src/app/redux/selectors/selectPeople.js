@@ -1,4 +1,4 @@
-import { getPeopleFilteredByKeyword } from "./filterPrerson.jsx";
+import { getPeopleFilteredByKeyword } from "./filterPrerson.js";
 export const selectPeople = (state) => {
   let p;
   if (state.settings.search === "") {
