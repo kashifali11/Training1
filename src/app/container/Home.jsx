@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPeople } from "../redux/actions/peopleActions";
 import { CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import PersonalDetailModal from "../components/home/personalDetailModal/personalDetailModal.jsx";
-import Search from "../components/home/search/search.jsx";
+import PersonalDetailModal from "../components/home/personalDetailModal/PersonalDetailModal.jsx";
+import PeopleSearchBar from "../components/home/peopleSearchBar/PeopleSearchBar.jsx";
 import { selectPeople } from "../redux/selectors/selectPeople";
-import PeopleList from "../components/home/peopleList/peopleList.jsx";
-import ProgressBar from "../components/home/progressBar/progress.jsx";
+import PeopleList from "../components/home/peopleList/PeopleList.jsx";
+import ProgressBar from "../components/home/progressBar/Progress.jsx";
 import { isEmpty } from "../utils/flags";
-import CustomAppBar from "../components/common/appBar/appBar.jsx";
+import CustomAppBar from "../components/common/appBar/AppBar.jsx";
 const useStyles = makeStyles({
   cardCont: {
     width: 250,
@@ -54,7 +54,7 @@ function Home() {
   return (
     <>
       <CustomAppBar />
-      <Search />
+      <PeopleSearchBar />
       {!isEmpty(people) ? (
         <>
           <PeopleList />

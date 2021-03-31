@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { selectPeople } from "../../../redux/selectors/selectPeople";
 import { Grid } from "@material-ui/core";
-import PersonCard from "./personCard/personCard.jsx";
+import PersonCard from "./personCard/PersonCard.jsx";
 const useStyles = makeStyles({
   cont: {
     paddingTop: 12,

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Container as AppLayout, makeStyles } from "@material-ui/core";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Home from "./container/home.jsx";
-import Settings from "./container/settings.jsx";
+import Home from "./container/Home.jsx";
+import Settings from "./container/Settings.jsx";
 import Store from "./redux/store";
 import { Provider } from "react-redux";
 import { fetchPeople } from "./redux/actions/peopleActions";
-import AppErrorBoundary from "./components/common/errorBoundry/errorBoundary.jsx";
+import AppErrorBoundary from "./components/common/errorBoundry/ErrorBoundary.jsx";
 const useStyles = makeStyles({
   container: {
     marginLeft: 50,

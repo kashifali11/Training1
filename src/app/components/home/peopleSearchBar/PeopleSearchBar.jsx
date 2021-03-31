@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     padding: 10,
   },
 });
-function Search() {
+export default function PeopleSearchBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,5 +43,3 @@ function Search() {
     </Container>
   );
 }
-
-export default Search;

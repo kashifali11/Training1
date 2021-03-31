@@ -1,7 +1,7 @@
 import { MenuItem, Select, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CustomAppBar from "../components/common/appBar/appBar.jsx";
+import CustomAppBar from "../components/common/appBar/AppBar.jsx";
 import { setNationality } from "../redux/actions/settingsAction";
 
 function Settings() {
