@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPeople, resetFetch } from "../redux/actions/peopleActions";
+import { fetchPeople } from "../redux/actions/peopleActions";
 import { CircularProgress, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonalDetailModal from "../components/home/personalDetailModal/personalDetailModal.jsx";
@@ -36,7 +36,6 @@ function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const people = useSelector((state) => selectPeople(state));
-  // const searchKey = useSelector((state) => state.settingReducer.searchPeopleTerm);
   const observer = useRef();
   const hasMore = useSelector((state) => state.peopleReducer.hasMore);
   const loading = useSelector((state) => state.peopleReducer.loading);
@@ -67,6 +66,7 @@ function Home() {
   const handlePersonalModalClose = () => {
     setOpenPersonalModal(false);
   };
+
   return (
     <div>
       <Search />
