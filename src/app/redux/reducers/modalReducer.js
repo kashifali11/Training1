@@ -1,23 +1,28 @@
-import { MODAL_CLOSE, MODAL_OPEN } from "../types/modalTypes";
+import { PERSON_MODAL_CLOSE, PERSON_MODAL_OPEN } from "../types/modalTypes";
 const initialState = {
-  modalOpen: false,
-  personId: "",
+  personModal: {
+    modalOpen : false,
+    personId: ""
+  },
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case MODAL_OPEN:
-
+    case PERSON_MODAL_OPEN:
       return {
         ...state,
-        modalOpen: true,
-        personId: action.payload,
+        personModal:{
+          modalOpen: true,
+          personId: action.payload,
+        }
       };
-    case MODAL_CLOSE:
+    case PERSON_MODAL_CLOSE:
       return {
         ...state,
-        modalOpen: false,
-        personId: "",
+        personModal:{
+          modalOpen: false,
+          personId: "",
+        }
       };
     default:
       return state;

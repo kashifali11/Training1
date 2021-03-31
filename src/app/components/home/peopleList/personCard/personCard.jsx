@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Divider, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { MODAL_OPEN } from "../../../../redux/types/modalTypes";
+import { PERSON_MODAL_OPEN } from "../../../../redux/types/modalTypes";
 const useStyles = makeStyles({
   cardContainer: {
     width: 250,
@@ -19,7 +19,7 @@ export default function PersonCard(props) {
   const dispatch = useDispatch();
   const handlePeopleClick = (ev) => {
     dispatch({
-      type: MODAL_OPEN,
+      type: PERSON_MODAL_OPEN,
       payload: ev.target.id,
     });
   };

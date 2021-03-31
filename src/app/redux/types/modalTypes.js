@@ -1,2 +1,2 @@
-export const MODAL_OPEN = "MODAL_OPEN";
-export const MODAL_CLOSE = "MODAL_CLOSE";
+export const PERSON_MODAL_OPEN = "PERSON_MODAL_OPEN";
+export const PERSON_MODAL_CLOSE = "PERSON_MODAL_CLOSE";

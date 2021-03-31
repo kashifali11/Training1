@@ -1,6 +1,6 @@
 export const getPerson = (state) => {
   return state.peopleReducer.people.find((person) => {
-    return state.modalReducer.personId == person.login.uuid;
+    return state.modalReducer.personModal.personId == person.login.uuid;
   });
 };
 
