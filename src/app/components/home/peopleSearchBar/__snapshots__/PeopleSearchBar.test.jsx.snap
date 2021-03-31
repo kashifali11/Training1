@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="MuiContainer-root makeStyles-cont-1 MuiContainer-maxWidthLg"
+  className="MuiContainer-root makeStyles-container-1 MuiContainer-maxWidthLg"
 >
   <div
     className="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
