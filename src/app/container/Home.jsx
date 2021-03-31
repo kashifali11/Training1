@@ -5,7 +5,7 @@ import { CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonalDetailModal from "../components/home/personalDetailModal/PersonalDetailModal.jsx";
 import PeopleSearchBar from "../components/home/peopleSearchBar/PeopleSearchBar.jsx";
-import { selectPeople } from "../redux/selectors/selectPeople";
+import { selectPeople } from "../redux/selectors/filterPrerson";
 import PeopleList from "../components/home/peopleList/PeopleList.jsx";
 import ProgressBar from "../components/home/progressBar/Progress.jsx";
 import { isEmpty } from "../utils/flags";

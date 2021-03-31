@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
-import { selectPeople } from "../../../redux/selectors/selectPeople";
+import { selectPeople } from "../../../redux/selectors/filterPrerson";
 import { Grid } from "@material-ui/core";
 import PersonCard from "./personCard/PersonCard.jsx";
 const useStyles = makeStyles({
