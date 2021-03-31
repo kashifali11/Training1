@@ -1,19 +1,19 @@
 import {
-  FETCHING,
+  FETCHING_PEOPLE,
   FETCH_PEOPLE,
   RESET_FETCH_PEOPLE,
 } from "../types/peopleTypes.js";
 import axios from "axios";
-export const fetchPeople = (page, nat, results) => (dispatch) => {
+export const fetchPeople = (page, nat, limit) => (dispatch) => {
   dispatch({
-    type: FETCHING,
+    type: FETCHING_PEOPLE,
   });
   axios
     .get(
       "https://randomuser.me/api/?page=" +
         page +
         "&results=" +
-        results +
+        limit +
         "&seed=abc&nat=" +
         nat
     )
@@ -23,7 +23,23 @@ export const fetchPeople = (page, nat, results) => (dispatch) => {
         payload: res.data.results,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // try {
+  //   const results = await axios.get(
+  //     "https://randomuser.me/api/?page=" +
+  //       page +
+  //       "&results=" +
+  //       limit +
+  //       "&seed=abc&nat=" +
+  //       nat
+  //   );
+  //   console.log(results)
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 
 export const resetFetchPeople = () => (dispatch) => {

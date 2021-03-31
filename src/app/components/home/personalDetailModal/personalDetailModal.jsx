@@ -7,8 +7,9 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPerson } from "../../../redux/selectors/filterPrerson.js";
+import { MODAL_CLOSE } from "../../../redux/types/modalTypes.js";
 
 const useStyles = makeStyles({
   media: {
@@ -25,12 +26,14 @@ const useStyles = makeStyles({
   },
 });
 
-function PersonalDetailModal(props) {
+function PersonalDetailModal() {
   const classes = useStyles();
-  const person = useSelector((state) => getPerson(state, props.personalId));
-  if (props.openModal) {
-    return (
-      <Dialog open={props.openModal} onClose={props.handleModalClose}>
+  const person = useSelector((state) => getPerson(state));
+  const modalOpen = useSelector((state) => state.modalReducer.modalOpen);
+  const dispatch = useDispatch();
+  return (
+    modalOpen && (
+      <Dialog open={modalOpen} onClose={() => dispatch({ type: MODAL_CLOSE })}>
         <Card className={classes.cardContainer}>
           <CardContent>
             <img
@@ -74,8 +77,8 @@ function PersonalDetailModal(props) {
           </CardContent>
         </Card>
       </Dialog>
-    );
-  } else return null;
+    )
+  );
 }
 
 export default PersonalDetailModal;

@@ -1,6 +1,6 @@
 import {
   FETCH_PEOPLE,
-  FETCHING,
+  FETCHING_PEOPLE,
   RESET_FETCH_PEOPLE,
   SET_SEARCH_TERM,
 } from "../types/peopleTypes.js";
@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
         pageNo: state.pageNo + 1,
         loading: false,
       };
-    case FETCHING:
+    case FETCHING_PEOPLE:
       return {
         ...state,
         loading: true,

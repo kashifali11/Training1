@@ -5,7 +5,7 @@ export const setNationality = (nationality) => (dispatch, getState) => {
     type: SET_NATIONALITY,
     payload: nationality,
   });
-  console.log();
+
   dispatch(resetFetchPeople());
   return dispatch(fetchPeople(1, nationality, 100));
 };

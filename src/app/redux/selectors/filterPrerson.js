@@ -1,6 +1,6 @@
-export const getPerson = (state, id) => {
+export const getPerson = (state) => {
   return state.peopleReducer.people.find((person) => {
-    return id == person.login.uuid;
+    return state.modalReducer.personId == person.login.uuid;
   });
 };
 

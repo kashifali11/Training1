@@ -1,6 +1,7 @@
 import { MenuItem, Select, Typography, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CustomAppBar from "../components/common/appBar/appBar.jsx";
 import { setNationality } from "../redux/actions/settingsAction";
 
 function Settings() {
@@ -11,6 +12,7 @@ function Settings() {
   };
   return (
     <div style={{ margin: "auto", width: "70%" }}>
+      <CustomAppBar />
       <Typography variant="h4" component="h1">
         Settings
       </Typography>

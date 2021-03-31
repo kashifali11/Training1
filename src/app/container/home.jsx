@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPeople } from "../redux/actions/peopleActions";
-import { CircularProgress, Grid, Typography } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PersonalDetailModal from "../components/home/personalDetailModal/personalDetailModal.jsx";
 import Search from "../components/home/search/search.jsx";
@@ -9,6 +9,7 @@ import { selectPeople } from "../redux/selectors/selectPeople";
 import PeopleList from "../components/home/peopleList/peopleList.jsx";
 import ProgressBar from "../components/home/progressBar/progress.jsx";
 import { isEmpty } from "../utils/flags";
+import CustomAppBar from "../components/common/appBar/appBar.jsx";
 const useStyles = makeStyles({
   cardCont: {
     width: 250,
@@ -19,20 +20,12 @@ const useStyles = makeStyles({
     width: 220,
     height: "auto",
   },
-  cont: {
-    paddingTop: 12,
-    marginTop: -20,
-    marginLeft: 350,
-    marginRight: -400,
-  },
   progressBar: {
     marginLeft: 800,
   },
 });
 
 function Home() {
-  const [openPersonalModal, setOpenPersonalModal] = useState(false);
-  const [personId, setPersonId] = useState("");
   const classes = useStyles();
   const dispatch = useDispatch();
   const people = useSelector((state) => selectPeople(state));
@@ -58,50 +51,21 @@ function Home() {
     }
   };
 
-  const getPersonId = (id) => {
-    setOpenPersonalModal(true);
-    setPersonId(id);
-  };
-
-  const handlePersonalModalClose = () => {
-    setOpenPersonalModal(false);
-  };
-
   return (
-    <div>
+    <>
+      <CustomAppBar />
       <Search />
       {!isEmpty(people) ? (
-        <div>
-          <Grid container>
-            <Grid item></Grid>
-            <Grid item>
-              <div className={classes.cont}>
-                <Grid container>
-                  <PeopleList setPersonId={getPersonId} />
-                </Grid>
-              </div>
-              <ProgressBar />
-            </Grid>
-          </Grid>
+        <>
+          <PeopleList />
           <div ref={lastPersonRef} />
-          <PersonalDetailModal
-            openModal={openPersonalModal}
-            handleModalClose={handlePersonalModalClose}
-            personalId={personId}
-          />
-        </div>
+          <PersonalDetailModal />
+          <ProgressBar />
+        </>
       ) : (
-        <div>
-          {pageNo === 20 ? (
-            <Typography className={classes.progressBar}>
-              No Results Found Try Something Different
-            </Typography>
-          ) : (
-            <CircularProgress className={classes.progressBar} />
-          )}
-        </div>
+        <CircularProgress className={classes.progressBar} />
       )}
-    </div>
+    </>
   );
 }
 

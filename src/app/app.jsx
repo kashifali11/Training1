@@ -3,10 +3,9 @@ import { Container as AppLayout, makeStyles } from "@material-ui/core";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./container/home.jsx";
 import Settings from "./container/settings.jsx";
-import CustomAppBar from "./components/common/appBar/appBar.jsx";
 import Store from "./redux/store";
 import { Provider } from "react-redux";
-import { fetchPeople, resetFetchPeople } from "./redux/actions/peopleActions";
+import { fetchPeople } from "./redux/actions/peopleActions";
 import AppErrorBoundary from "./components/common/errorBoundry/errorBoundary.jsx";
 const useStyles = makeStyles({
   container: {
@@ -19,7 +18,6 @@ export default function App() {
   const nationality = Store.getState().settingReducer.nationality;
   const dispatch = Store.dispatch;
   useEffect(() => {
-    dispatch(resetFetchPeople());
     dispatch(fetchPeople(1, nationality, 100));
   }, [nationality]);
   const classes = useStyles();
@@ -29,7 +27,6 @@ export default function App() {
         <React.StrictMode>
           <AppErrorBoundary>
             <AppLayout className={classes.container}>
-              <CustomAppBar />
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/settings" component={Settings} />
