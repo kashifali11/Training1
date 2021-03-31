@@ -17,7 +17,9 @@ const useStyles = makeStyles({
 export default function App() {
   const nationality = Store.getState().settingReducer.nationality;
   const dispatch = Store.dispatch;
-  dispatch(fetchPeople(1, nationality, 100));
+  useEffect(() => {
+    dispatch(fetchPeople(1, nationality, 100));
+  }, []);
   const classes = useStyles();
   return (
     <Provider store={Store}>

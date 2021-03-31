@@ -1,8 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Divider, Typography } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { PERSON_MODAL_OPEN } from "../../../../redux/types/modalTypes";
+
 const useStyles = makeStyles({
   cardContainer: {
     width: 250,
@@ -16,32 +15,28 @@ const useStyles = makeStyles({
 });
 export default function PersonCard(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const handlePeopleClick = (ev) => {
-    dispatch({
-      type: PERSON_MODAL_OPEN,
-      payload: ev.target.id,
-    });
+    props.openPersonModalAction(ev.target.id);
   };
   return (
     <Card className={classes.cardContainer}>
       <CardContent>
         <img
-          id={props.person.login.uuid}
+          id={props.personId}
           onClick={handlePeopleClick}
           className={classes.image}
-          src={props.person.picture.large}
+          src={props.personPicture}
           alt="Persons Image"
         />
         <Divider />
         <Typography
-          id={props.person.login.uuid}
+          id={props.personId}
           onClick={handlePeopleClick}
           variant="h6"
           component="h6"
           style={{ marginTop: 10 }}
         >
-          {props.person.name.first} {props.person.name.last}
+          {props.personName}
         </Typography>
       </CardContent>
     </Card>

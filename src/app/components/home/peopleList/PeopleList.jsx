@@ -1,7 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
-import { selectPeople } from "../../../redux/selectors/filterPrerson";
 import { Grid } from "@material-ui/core";
 import PersonCard from "./personCard/PersonCard.jsx";
 const useStyles = makeStyles({
@@ -20,7 +18,12 @@ export default function PeopleList(props) {
         {props.people.map((person) => {
           return (
             <Grid item key={person.login.uuid}>
-              <PersonCard person={person} />
+              <PersonCard
+                personPicture={person.picture.large}
+                personId={person.login.uuid}
+                personName={person.name.first + " " + person.name.last}
+                openPersonModalAction={props.openPersonModalAction}
+              />
             </Grid>
           );
         })}

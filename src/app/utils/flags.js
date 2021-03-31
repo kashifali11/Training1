@@ -3,3 +3,9 @@ export const isEmpty = (data) => {
     return false;
   } else return true;
 };
+
+export const isUndefined = (data) => {
+  if (data === undefined) {
+    return true;
+  } else return false;
+};
