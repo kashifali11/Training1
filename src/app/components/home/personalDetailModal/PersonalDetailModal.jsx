@@ -35,7 +35,7 @@ function PersonalDetailModal(props) {
               alt="image"
               className={classes.media}
             />
-            {props.personalDetails.map((detail,index) => {
+            {props.personalDetails.map((detail) => {
               return (
                 <div key={detail}>
                   <Divider />

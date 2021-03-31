@@ -8,6 +8,10 @@ import { setNationality } from "../redux/actions/settingsAction";
 function Settings() {
   const dispatch = useDispatch();
   const nationality = useSelector((state) => state.settingReducer.nationality);
+  const nationalities = ["CH", "ES", "FR", "GB"];
+  const setNationalityInSettings = (ev) =>{
+    dispatch(setNationality(ev.target.value))
+  }
   return (
     <div style={{ margin: "auto", width: "70%" }}>
       <CustomAppBar />
@@ -15,8 +19,10 @@ function Settings() {
         Settings
       </Typography>
       <Nationality
-        setNationality={(nationality) => dispatch(setNationality(nationality))}
         nationality={nationality}
+        nationalities={nationalities}
+        settingName="Nationality"
+        handleSettingsChange={setNationalityInSettings}
       />
     </div>
   );
