@@ -12,13 +12,12 @@ const useStyles = makeStyles({
     marginRight: -400,
   },
 });
-export default function PeopleList() {
+export default function PeopleList(props) {
   const classes = useStyles();
-  const people = useSelector((state) => selectPeople(state));
   return (
     <div className={classes.cont}>
       <Grid container>
-        {people.map((person) => {
+        {props.people.map((person) => {
           return (
             <Grid item key={person.login.uuid}>
               <PersonCard person={person} />

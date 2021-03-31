@@ -57,7 +57,7 @@ function Home() {
       <PeopleSearchBar />
       {!isEmpty(people) ? (
         <>
-          <PeopleList />
+          <PeopleList people={people} />
           <div ref={lastPersonRef} />
           <PersonalDetailModal />
           <ProgressBar />
