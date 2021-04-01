@@ -10,19 +10,19 @@ const useStyles = makeStyles({
     marginRight: -400,
   },
 });
-export default function PeopleList(props) {
+export default function PeopleList({ people, openPersonModalAction }) {
   const classes = useStyles();
   return (
     <div className={classes.cont}>
       <Grid container>
-        {props.people.map((person) => {
+        {people.map((person) => {
           return (
             <Grid item key={person.login.uuid}>
               <PersonCard
                 personPicture={person.picture.large}
                 personId={person.login.uuid}
                 personName={person.name.first + " " + person.name.last}
-                openPersonModalAction={props.openPersonModalAction}
+                openPersonModalAction={openPersonModalAction}
               />
             </Grid>
           );

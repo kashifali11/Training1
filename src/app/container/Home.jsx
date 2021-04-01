@@ -68,7 +68,7 @@ function Home() {
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         if (hasMore) {
-          dispatch(fetchPeople(pageNo, nationality, 50));
+          dispatch(fetchPeople(pageNo, nationality));
         }
       }
     });
@@ -92,10 +92,10 @@ function Home() {
         <>
           <PeopleList
             people={people}
-            openPersonModalAction={(id) =>
+            openPersonModalAction={(event) =>
               dispatch({
                 type: PERSON_MODAL_OPEN,
-                payload: id,
+                payload: event.target.id,
               })
             }
           />

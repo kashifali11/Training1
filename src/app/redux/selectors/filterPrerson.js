@@ -1,3 +1,5 @@
+import { isEmpty } from "../../utils/flags";
+
 export const getPerson = (state) => {
   return state.peopleReducer.people.find((person) => {
     return state.modalReducer.personModal.personId == person.login.uuid;
@@ -15,7 +17,7 @@ export const getPeopleFilteredByKeyword = (state) => {
 
 export const selectPeople = (state) => {
   let people;
-  if (state.peopleReducer.searchPeopleTerm === "") {
+  if (isEmpty(state.peopleReducer.searchPeopleTerm)) {
     people = state.peopleReducer.people.slice(
       0,
       state.peopleReducer.people.length - 50

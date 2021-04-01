@@ -9,14 +9,14 @@ const useStyles = makeStyles({
     padding: 10,
   },
 });
-export default function PeopleSearchBar(props) {
+export default function PeopleSearchBar({dispatchSearchAction}) {
   const classes = useStyles();
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchTermChange = (ev) => {
     setSearchTerm(ev.target.value);
   };
   const handleSearchClick = () => {
-    props.dispatchSearchAction(searchTerm);
+    dispatchSearchAction(searchTerm);
   };
   return (
     <Container className={classes.container}>

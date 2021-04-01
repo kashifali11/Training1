@@ -23,19 +23,20 @@ const useStyles = makeStyles({
   },
 });
 
-function PersonalDetailModal(props) {
+function PersonalDetailModal({
+  personModalOpen,
+  closePersonModal,
+  personPicture,
+  personalDetails,
+}) {
   const classes = useStyles();
   return (
-    props.personModalOpen && (
-      <Dialog open={props.personModalOpen} onClose={props.closePersonModal}>
+    personModalOpen && (
+      <Dialog open={personModalOpen} onClose={closePersonModal}>
         <Card className={classes.cardContainer}>
           <CardContent>
-            <img
-              src={props.personPicture}
-              alt="image"
-              className={classes.media}
-            />
-            {props.personalDetails.map((detail) => {
+            <img src={personPicture} alt="image" className={classes.media} />
+            {personalDetails.map((detail) => {
               return (
                 <div key={detail}>
                   <Divider />

@@ -13,30 +13,32 @@ const useStyles = makeStyles({
     height: "auto",
   },
 });
-export default function PersonCard(props) {
+export default function PersonCard({
+  openPersonModalAction,
+  personName,
+  personPicture,
+  personId,
+}) {
   const classes = useStyles();
-  const handlePeopleClick = (ev) => {
-    props.openPersonModalAction(ev.target.id);
-  };
   return (
     <Card className={classes.cardContainer}>
       <CardContent>
         <img
-          id={props.personId}
-          onClick={handlePeopleClick}
+          id={personId}
+          onClick={openPersonModalAction}
           className={classes.image}
-          src={props.personPicture}
+          src={personPicture}
           alt="Persons Image"
         />
         <Divider />
         <Typography
-          id={props.personId}
-          onClick={handlePeopleClick}
+          id={personId}
+          onClick={openPersonModalAction}
           variant="h6"
           component="h6"
           style={{ marginTop: 10 }}
         >
-          {props.personName}
+          {personName}
         </Typography>
       </CardContent>
     </Card>

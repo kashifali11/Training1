@@ -4,7 +4,7 @@ import {
   RESET_FETCH_PEOPLE,
 } from "../types/peopleTypes.js";
 import axios from "axios";
-export const fetchPeople = (page, nat, limit) => async (dispatch) => {
+export const fetchPeople = (page, nat, limit=50) => async (dispatch) => {
   dispatch({
     type: FETCHING_PEOPLE,
   });
