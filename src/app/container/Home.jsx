@@ -11,7 +11,11 @@ import ProgressBar from "../components/home/progressBar/Progress.jsx";
 import { isEmpty, isUndefined } from "../utils/flags";
 import CustomAppBar from "../components/common/appBar/AppBar.jsx";
 import { getPerson } from "../redux/selectors/filterPrerson";
-import { PERSON_MODAL_OPEN, PERSON_MODAL_CLOSE } from "../redux/types/modalTypes";
+import { SET_SEARCH_TERM } from "../redux/types/peopleTypes";
+import {
+  PERSON_MODAL_OPEN,
+  PERSON_MODAL_CLOSE,
+} from "../redux/types/modalTypes";
 const useStyles = makeStyles({
   cardCont: {
     width: 250,
@@ -37,17 +41,20 @@ function Home() {
   const pageNo = useSelector((state) => state.peopleReducer.pageNo);
   const nationality = useSelector((state) => state.settingReducer.nationality);
   const person = useSelector((state) => getPerson(state));
-  var personalDetails = []
-  if(!isUndefined(person)){
+  var personalDetails = [];
+  if (!isUndefined(person)) {
     personalDetails = [
-      "Name: "+person.name.first+" "+person.name.last,
-      "Street: "+person.location.street.number+" "+person.location.street.name,
-      "City: "+person.location.city,
-      "State: "+person.location.state,
-      "Post Code: "+person.location.postcode,
-      "Phone: "+person.phone,
-      "Cell: "+person.cell,
-      "Nationality: "+person.nat
+      "Name: " + person.name.first + " " + person.name.last,
+      "Street: " +
+        person.location.street.number +
+        " " +
+        person.location.street.name,
+      "City: " + person.location.city,
+      "State: " + person.location.state,
+      "Post Code: " + person.location.postcode,
+      "Phone: " + person.phone,
+      "Cell: " + person.cell,
+      "Nationality: " + person.nat,
     ];
   }
   const personModalOpen = useSelector(
@@ -73,7 +80,14 @@ function Home() {
   return (
     <>
       <CustomAppBar />
-      <PeopleSearchBar />
+      <PeopleSearchBar
+        dispatchSearchAction={(searchTerm) =>
+          dispatch({
+            type: SET_SEARCH_TERM,
+            payload: searchTerm,
+          })
+        }
+      />
       {!isEmpty(people) ? (
         <>
           <PeopleList

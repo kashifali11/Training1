@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
     case FETCH_PEOPLE:
       return {
         ...state,
-        people: state.people.concat(action.payload),
+        people: [...state.people,...action.payload],
         hasMore: state.people.length + 50 < 999 ? true : false,
         pageNo: state.pageNo + 1,
         loading: false,

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { SET_SEARCH_TERM } from "../../../redux/types/peopleTypes";
 
 const useStyles = makeStyles({
   container: {
@@ -11,18 +9,14 @@ const useStyles = makeStyles({
     padding: 10,
   },
 });
-export default function PeopleSearchBar() {
+export default function PeopleSearchBar(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchTermChange = (ev) => {
     setSearchTerm(ev.target.value);
   };
   const handleSearchClick = () => {
-    dispatch({
-      type: SET_SEARCH_TERM,
-      payload: searchTerm,
-    });
+    props.dispatchSearchAction(searchTerm);
   };
   return (
     <Container className={classes.container}>
