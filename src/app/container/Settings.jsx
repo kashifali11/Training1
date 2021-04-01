@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomAppBar from "../components/common/appBar/AppBar.jsx";
-import Nationality from "../components/settings/nationality/Nationality.jsx";
+import SelectSetting from "../components/settings/selectSetting/SelectSetting.jsx";
 import { setNationality } from "../redux/actions/settingsAction";
 
 function Settings() {
@@ -18,7 +18,7 @@ function Settings() {
       <Typography variant="h4" component="h1">
         Settings
       </Typography>
-      <Nationality
+      <SelectSetting 
         nationality={nationality}
         nationalities={nationalities}
         settingName="Nationality"
